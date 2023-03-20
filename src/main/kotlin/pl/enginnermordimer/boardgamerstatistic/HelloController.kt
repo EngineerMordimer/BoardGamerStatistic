@@ -4,11 +4,16 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import pl.enginnermordimer.boardgamerstatistic.model.User
+import pl.enginnermordimer.boardgamerstatistic.service.BggService
 import pl.enginnermordimer.boardgamerstatistic.service.CustomService
 import pl.enginnermordimer.boardgamerstatistic.service.UserService
 
 @RestController
-class HelloController(val userService: UserService, val customService: CustomService) {
+class HelloController(
+    val userService: UserService,
+    val customService: CustomService,
+    val bggService: BggService
+) {
 
     @GetMapping("/")
     fun index(): String {
@@ -23,5 +28,8 @@ class HelloController(val userService: UserService, val customService: CustomSer
 
     @GetMapping("/user")
     fun getUserById(@RequestParam id: Long): User? = userService.findUserById(id)
+
+    @GetMapping("/bgg/checkConnection")
+    fun bggCheckConnection(): String? = bggService.getCustomGame()
 
 }
