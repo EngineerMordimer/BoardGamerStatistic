@@ -32,4 +32,7 @@ class HelloController(
     @GetMapping("/bgg/checkConnection")
     fun bggCheckConnection(): String? = bggService.getCustomGame()
 
+    @GetMapping("/bgg/boardgame")
+    fun bggCheckConnection(@RequestParam id: Long): String? = bggService.getGameById(id)
+
 }
